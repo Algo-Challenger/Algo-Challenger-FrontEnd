@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import GoogleLogin from "react-google-login";
+import GoogleButton from "react-google-button";
 
 class LoginButton extends Component
 {
@@ -17,16 +18,19 @@ class LoginButton extends Component
 	render()
 	{
 		return (
-			<div>
+			<>
 				<GoogleLogin
 					clientId={process.env.REACT_APP_CLIENTID}
-					buttonText="Login"
+					render={renderProps => (
+						<GoogleButton onClick={renderProps.onClick} disabled={renderProps.disabled}>Sign in with Google</GoogleButton>
+					)}
 					onSuccess={this.onSuccess}
 					onFailure={this.onFailure}
 					cookiePolicy="single_host_origin"
 					isSignedIn={true}
+					className={this.props.className}
 				/>
-			</div>
+			</>
 		);
 	}
 }
