@@ -18,6 +18,9 @@ class App extends React.Component
 		this.state = {
 			profile: {},
 			challenges: [],
+			submission: '',
+			submissionID: '',
+			challengeStatus: null,
 		};
 	}
 
@@ -42,32 +45,48 @@ class App extends React.Component
 		this.setState({profile: profile})
 	};
 
+	
 	getChallenges = async() => {
 		try {
 			let url = `${process.env.REACT_APP_SERVER}/challenges`
 			console.log(url)
 			let challenges = await axios.get(url);
 			this.setState({ challenges: challenges.data })
-			console.log(this.state.challenges);
 		} catch (error) {
 			console.log('error getting challenges', error.response);
 		}
 	}
+	
+	getInput = (e) => {
+		e.preventDefault();
+		this.setState({ submission: e.target.value });
+		this.setState({ submissionID: e.target.id });
+	}
 
-	sendSolution = async() => {
+	sendSolution = async(e) => {
+		e.preventDefault();
 		try {
-			let url = `${process.env.REACT_APP_SERVER}/challenges`
+			let url = `${process.env.REACT_APP_SERVER}/sendchallenge`;
+			let submission = {
+				code: this.state.submission,
+				id: this.state.submissionID,
+				email: this.state.profile.email
+			}
+			let response = await axios.post(url, submission);
+			if (response.data === true) {
+				this.setState({ challengeStatus: true });
+			} else if (response.data === false) {
+				this.setState({ challengeStatus: false })
+			}
 		} catch (error) {
-
+			console.log('error sending challenge solution', error.response);
 		}
 	}
 
 	render()
 	{
-
 		if (Object.keys(this.state.profile).length === 0)
 		{
-			console.log("Sending login page");
 			return <Login setProfile={this.setProfile}/>
 		}
 
@@ -82,7 +101,12 @@ class App extends React.Component
 						<Route path="/profile" element={<Profile profile={this.state.profile}/>}/>
 						{
 						this.state.challenges && this.state.challenges.map( (challenge, i) =>
-							<Route key={challenge._id} path={`/challenge/${challenge.name}`} element={<ChallengePage challenge={challenge}/>}/>
+							<Route key={challenge._id} 
+										 path={`/challenge/${challenge.name}`}
+										 element={<ChallengePage challenge={challenge} 
+										 												 handleSubmit={this.sendSolution}
+																						 handleInput={this.getInput}
+																						 status={this.state.challengeStatus}/>}/>
 						)
 						}
 					</Routes>
