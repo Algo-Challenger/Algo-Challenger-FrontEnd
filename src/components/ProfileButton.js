@@ -32,7 +32,7 @@ class ProfileButton extends React.Component
 				</button>
 
 				{this.state.showDropdown
-					? <ProfileDropdown setProfile={this.props.setProfile}/>
+					? <ProfileDropdown logout={this.props.logout}/>
 					: null}
 
 			</div>
