@@ -9,7 +9,7 @@ class Home extends React.Component {
 				<ul className="mdc-list">
 					{
 						this.props.challenges && this.props.challenges.map( (challenge, i) =>
-							<Challenge key={i} 
+							<Challenge key={challenge._id} 
 												 name={challenge.name}
 												 type={challenge.type}/>
 						)
