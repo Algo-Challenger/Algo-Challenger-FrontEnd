@@ -40,10 +40,33 @@ class App extends React.Component
 		this.getChallenges();
 	}
 
-	setProfile = (profile) =>
+	setProfile = async (profile) =>
 	{
-		this.setState({profile: profile});
+		let activeUser = await this.checkUser(profile);
+		console.log("active user");
+		console.log(activeUser);
+		this.setState({ profile: activeUser });
 	};
+
+	logout = () => {
+		this.setState({ profile: {} });
+	};
+
+
+	checkUser = async(profile) => {
+		try {
+			let user = {
+				name: profile.name,
+				email: profile.email
+			}
+			let url = `${process.env.REACT_APP_SERVER}/user`;
+			let activeUser = await axios.post(url, user);
+			activeUser.data.imageUrl = profile.imageUrl;
+			return activeUser.data;
+		} catch (error) {
+			console.log('error getting user', error.response);
+		}
+	}
 
 
 	getChallenges = async () =>
@@ -51,7 +74,6 @@ class App extends React.Component
 		try
 		{
 			let url = `${process.env.REACT_APP_SERVER}/challenges`;
-			console.log(url);
 			let challenges = await axios.get(url);
 			this.setState({challenges: challenges.data});
 		} catch (error)
@@ -75,7 +97,7 @@ class App extends React.Component
 			let url = `${process.env.REACT_APP_SERVER}/sendchallenge`;
 			let submission = {
 				code: this.state.submission,
-				id: this.state.submissionID,
+				challengeId: this.state.submissionID,
 				email: this.state.profile.email
 			};
 			let response = await axios.post(url, submission);
@@ -98,11 +120,10 @@ class App extends React.Component
 		{
 			return <Login setProfile={this.setProfile}/>;
 		}
-
 		return (
 			<div className="w-full m-0 h-full flex flex-col">
 				<Router>
-					<Header setProfile={this.setProfile} profile={this.state.profile}/>
+					<Header logout={this.logout} profile={this.state.profile}/>
 					<Routes>
 						<Route path="/" element={<Home challenges={this.state.challenges}/>}/>
 						<Route path="/login" element={<LogoutButton setProfile={this.setProfile}/>}/>

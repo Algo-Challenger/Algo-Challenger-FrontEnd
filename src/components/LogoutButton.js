@@ -6,7 +6,7 @@ class LogoutButton extends React.Component
 	onLogout = () =>
 	{
 		console.log("Logged out")
-		this.props.setProfile({});
+		this.props.logout();
 	}
 
 	render()

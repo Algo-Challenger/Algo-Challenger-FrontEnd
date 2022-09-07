@@ -11,7 +11,7 @@ class Header extends React.Component
 				<Link to="/">Algo Challenger</Link>
 				<Link to="/">Home</Link>
 				<Link to="/about">About Us</Link>
-				<ProfileButton imageUrl={this.props.profile.imageUrl} setProfile={this.props.setProfile}/>
+				<ProfileButton imageUrl={this.props.profile.imageUrl} logout={this.props.logout}/>
 			</div>
 		);
 	}
