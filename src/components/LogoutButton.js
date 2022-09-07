@@ -12,11 +12,12 @@ class LogoutButton extends React.Component
 	render()
 	{
 		return (
-			<div>
+			<div className={this.props.className}>
 				<GoogleLogout
 					clientId={process.env.REACT_APP_CLIENTID}
-					buttonText="Logout"
+					buttonText="Sign Out"
 					onLogoutSuccess={this.onLogout}
+					className="h-10 w-32"
 				/>
 			</div>
 		);

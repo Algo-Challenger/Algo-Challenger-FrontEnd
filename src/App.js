@@ -49,6 +49,7 @@ class App extends React.Component
 	getChallenges = async() => {
 		try {
 			let url = `${process.env.REACT_APP_SERVER}/challenges`
+			console.log(url)
 			let challenges = await axios.get(url);
 			this.setState({ challenges: challenges.data })
 		} catch (error) {
@@ -90,7 +91,7 @@ class App extends React.Component
 		}
 
 		return (
-			<div className="App">
+			<div className="w-full m-0 h-full flex flex-col">
 				<Router>
 					<Header setProfile={this.setProfile} profile={this.state.profile}/>
 					<Routes>
