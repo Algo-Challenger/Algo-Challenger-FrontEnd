@@ -38,9 +38,9 @@ class App extends React.Component
 		this.getChallenges();
 	}
 
-	refreshProfile = async (userId) =>
+	refreshProfile = async () =>
 	{
-		const url = `${process.env.REACT_APP_SERVER}/user/${userId}`;
+		const url = `${process.env.REACT_APP_SERVER}/user/${this.state.profile._id}`;
 
 		const updatedUser = await axios.get(url);
 
@@ -103,7 +103,7 @@ class App extends React.Component
 			};
 			let response = await axios.post(url, submission);
 
-			await this.refreshProfile(this.state.profile._id);
+			await this.refreshProfile();
 			this.setState(
 				{
 					challengeStatus: !!response.data
@@ -125,7 +125,7 @@ class App extends React.Component
 				<Router>
 					<Header logout={this.logout} profile={this.state.profile}/>
 					<Routes>
-						<Route path="/" element={<Home challenges={this.state.challenges} favorite={this.selectFavorite} profile={this.state.profile} rerender={this.setProfile}/>}/>
+						<Route path="/" element={<Home challenges={this.state.challenges} profile={this.state.profile} rerender={this.refreshProfile}/>}/>
 						<Route path="/login" element={<LogoutButton setProfile={this.setProfile}/>}/>
 						<Route path="/about" element={<About/>}/>
 						<Route path="/profile" element={<Profile profile={this.state.profile}/>}/>
