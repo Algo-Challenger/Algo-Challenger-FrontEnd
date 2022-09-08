@@ -11,27 +11,32 @@ class Challenges extends React.Component {
 
 	render() {
 
-		const homeStyle = {
-			background: "darkgrey",
+		const bodyStyle = {
 			display: "flex",
 			flexDirection: "column",
 			marginLeft: "auto",
 			marginRight: "auto",
-			marginTop: "40px",
-			width: "80%"
+			width: "80%",
+			height: "100%"
 		}
 
 		const headerStyle = {
-			fontSize: "2rem",
-			margin: "auto"
+			fontSize: "3rem",
+			marginLeft: "auto",
+			marginRight: "auto",
+			marginTop: "20px",
+			padding: "0px"
 		}
 
 		const listStyle = {
-			margin: "auto",
+			marginLeft: "auto",
+			marginRight: "auto",
+			marginTop: "40px",
+			width: "35%"
 		}
 
 		return (
-			<div style={homeStyle}>
+			<div style={bodyStyle}>
 				<h1 style={headerStyle}>We Challenge You...</h1>
 				<ul className="mdc-list" style={listStyle}>
 					{
@@ -97,11 +102,21 @@ class Challenge extends React.Component {
 		const challengeItem = {
 			display: "flex",
 			alignItems: "center",
+			background: "rgba( 255, 255, 255, 0.15 )",
+			boxShadow: "0 8px 32px 0 rgba( 200, 200, 220, 0.18 )",
+			backdropFilter: "blur( 5px )",
+			borderRadius: "10px",
+			marginBottom: "20px"
 		}
 
 		const listItemComponent = {
 			marginRight: "10px",
-			marginLeft: "10px"
+			marginLeft: "15px"
+		}
+
+		const typeStyle = {
+			position: "absolute",
+			right: "20px"
 		}
 
 		return (
@@ -116,7 +131,7 @@ class Challenge extends React.Component {
 				</svg>
 				<Link to={`/challenge/${this.props.name}`}
 							style={{ display: "block", margin: "1rem 0" }}>{this.props.name}</Link>
-				<span style={listItemComponent}>{this.props.type}</span>
+				<span style={typeStyle}>{this.props.type}</span>
 
 			</li>
 		)
