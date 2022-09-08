@@ -42,6 +42,7 @@ class App extends React.Component
 	{
 		let activeUser = await this.checkUser(profile);
 		this.setState({profile: activeUser});
+
 	};
 
 	logout = () =>
@@ -49,11 +50,8 @@ class App extends React.Component
 		this.setState({profile: {}});
 	};
 
-
-	checkUser = async (profile) =>
-	{
-		try
-		{
+	checkUser = async(profile) => {
+		try {
 			let user = {
 				name: profile.name,
 				email: profile.email
@@ -67,7 +65,6 @@ class App extends React.Component
 			console.log('error getting user', error.response);
 		}
 	};
-
 
 	getChallenges = async () =>
 	{
@@ -115,7 +112,7 @@ class App extends React.Component
 				<Router>
 					<Header logout={this.logout} profile={this.state.profile}/>
 					<Routes>
-						<Route path="/" element={<Home challenges={this.state.challenges}/>}/>
+						<Route path="/" element={<Home challenges={this.state.challenges} favorite={this.selectFavorite} profile={this.state.profile} rerender={this.setProfile}/>}/>
 						<Route path="/login" element={<LogoutButton setProfile={this.setProfile}/>}/>
 						<Route path="/about" element={<About/>}/>
 						<Route path="/profile" element={<Profile profile={this.state.profile}/>}/>
