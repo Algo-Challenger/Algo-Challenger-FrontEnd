@@ -1,5 +1,6 @@
 import React from "react";
 import LoadingSpinner from "./LoadingSpinner";
+import Results from "./Results";
 
 class ChallengePage extends React.Component
 {
@@ -39,8 +40,9 @@ class ChallengePage extends React.Component
 
 	render()
 	{
+		console.log(this.props.status)
 		return (
-			<div className="px-10 pt-2 flex flex-1 justify-evenly max-h-fit">
+			<div className="px-10 pt-2 flex flex-1 justify-evenly max-h-screen">
 				<div className="flex flex-col w-5/12">
 					<div className="border-2 border-black flex-1 px-3 py-1">
 						<h1 className="text-center font-semibold">{this.props.challenge.name}</h1>
@@ -52,21 +54,21 @@ class ChallengePage extends React.Component
 						<p>Output: {this.props.challenge.tests.output}</p>
 					</div>
 				</div>
-				<div className="w-6/12 flex flex-col">
-					<form onSubmit={this.handleSubmit} className="text-right ">
+				<div className="w-6/12 flex flex-col h-full justify-around">
+					<form onSubmit={this.handleSubmit} className="text-right flex-1">
 						<textarea
-							className="w-full h-max border-2 border-black px-3 py-1 resize-none h-[40rem]"
+							className="w-full h-5/6 border-2 border-black px-3 py-1 resize-none "
 							defaultValue={this.state.input}
 							onChange={this.setInput}
 						/>
-						<button className="border border-black w-32">Submit</button>
+						<button className="border border-black w-32" type="submit">Submit</button>
 					</form>
-					<div className="">
+					<div className="flex-1">
 						<h2>Challenge Response</h2>
-						<div className="border-2 border-black h-52 flex justify-center items-center">
+						<div className="border-2 border-black h-3/4 flex flex-col">
 							{
 								this.props.status !== undefined && this.props.status !== null
-								? <h1 className="text-9xl font-light">{`${this.props.status}`}</h1>
+								? <Results status={this.props.status} output={this.props.challenge.tests.output}/>
 								: <LoadingSpinner/>
 							}
 
