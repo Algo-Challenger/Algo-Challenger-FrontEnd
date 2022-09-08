@@ -8,7 +8,7 @@ class Header extends React.Component
 	{
 		return (
 			<div className="flex w-full justify-between p-5 px-10 font-semibold text-xl">
-				<Link to="/">Algo Challenger</Link>
+				<Link to="/challenges">Algo Challenger</Link>
 				<Link to="/">Home</Link>
 				<Link to="/about">About Us</Link>
 				<ProfileButton imageUrl={this.props.profile.imageUrl} logout={this.props.logout}/>
