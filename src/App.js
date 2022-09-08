@@ -127,7 +127,7 @@ class App extends React.Component
 			color: 'white',
 			boxShadow: 'rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px',
 			fontSize: '1rem',
-			height: "100vh",
+			height: "100%",
 		}
 
 		if (Object.keys(this.state.profile).length === 0)
@@ -135,7 +135,7 @@ class App extends React.Component
 			return <Login setProfile={this.setProfile}/>;
 		}
 		return (
-			<div className="w-full m-0 flex flex-col h-screen pb-3" style={aboutStyle}>
+			<div className="w-full m-0 flex flex-col h-max pb-3" style={aboutStyle}>
 
 				<Router>
 					<Header logout={this.logout} profile={this.state.profile}/>
