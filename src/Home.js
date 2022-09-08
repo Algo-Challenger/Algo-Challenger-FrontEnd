@@ -8,8 +8,8 @@ class Home extends React.Component {
 				<h1>We Challenge You...</h1>
 				<ul className="mdc-list">
 					{
-						this.props.challenges && this.props.challenges.map( (challenge, i) =>
-							<Challenge key={challenge._id} 
+						this.props.challenges && this.props.challenges.map( (challenge) =>
+							<Challenge key={challenge._id}
 												 name={challenge.name}
 												 type={challenge.type}/>
 						)
