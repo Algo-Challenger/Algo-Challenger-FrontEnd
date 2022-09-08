@@ -123,11 +123,7 @@ class App extends React.Component
 	{
 
 		const aboutStyle = {
-			background: 'linear-gradient(45deg, #0A0068, #26007B, #42008D, black, #5E00A0, #7A00B2)',
-			color: 'white',
-			boxShadow: 'rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px',
-			fontSize: '1rem',
-			height: "100%",
+
 		}
 
 		if (Object.keys(this.state.profile).length === 0)
