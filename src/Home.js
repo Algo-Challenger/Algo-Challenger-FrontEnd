@@ -3,19 +3,12 @@ import React from 'react';
 import { Link } from "react-router-dom";
 
 class Home extends React.Component {
-	constructor(props) {
-		super(props);
-		this.state = {
-			saved: this.props.profile.savedChallenges,
-		}
-		this.props.rerender(this.props.profile);
+
+	updateSaved = () => {
+		this.props.rerender();
 	}
 
-	updateSaved = (newSaved) => {
-		this.setState({ saved: newSaved });
-	}
 
-	
 	render() {
 
 		const homeStyle = {
@@ -42,8 +35,8 @@ class Home extends React.Component {
 				<h1 style={headerStyle}>We Challenge You...</h1>
 				<ul className="mdc-list" style={listStyle}>
 					{
-						this.props.challenges && this.props.challenges.map( (challenge, i) => {
-							if (this.state.saved.includes(challenge._id)) {
+						this.props.challenges && this.props.challenges.map( (challenge) => {
+							if (this.props.profile.savedChallenges.includes(challenge._id)) {
 								return <Challenge key={challenge._id}
 													 color="gold"
 													 challengeId={challenge._id}
@@ -86,16 +79,16 @@ class Challenge extends React.Component {
 			this.setState({ color: "gold"})
 			let url = `${process.env.REACT_APP_SERVER}/save`;
 			await axios.put(url, challengeToSave);
-			let newSavedArr = [...this.props.profile.savedChallenges, challengeToSave];
-			this.props.update(newSavedArr);
+			// let newSavedArr = [...this.props.profile.savedChallenges, challengeToSave];
+			this.props.update();
 		} else {
 			this.setState({ color: "lightgrey"})
 			let url = `${process.env.REACT_APP_SERVER}/delete`;
 			await axios.delete(url, {data: challengeToSave});
-			let newSavedArr = this.props.profile.savedChallenges.map( challenge => {
-				return challenge !== challengeToSave.userId
-			})
-			this.props.update(newSavedArr);
+			// let newSavedArr = this.props.profile.savedChallenges.map( challenge => {
+			// 	return challenge !== challengeToSave.userId
+			// })
+			this.props.update();
 		}
 	};
 
@@ -113,8 +106,8 @@ class Challenge extends React.Component {
 
 		return (
 			<li className="mdc-list-item" style={challengeItem}>
-				<svg xmlns="http://www.w3.org/2000/svg" 
-							viewBox="0 0 20 20" 
+				<svg xmlns="http://www.w3.org/2000/svg"
+							viewBox="0 0 20 20"
 							fill={this.state.color}
 							className="w-5 h-5 text-yellow"
 							style={listItemComponent}
