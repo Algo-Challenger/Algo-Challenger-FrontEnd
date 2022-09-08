@@ -131,7 +131,7 @@ class App extends React.Component
 			return <Login setProfile={this.setProfile}/>;
 		}
 		return (
-			<div className="w-full m-0 flex flex-col h-max pb-3" style={aboutStyle}>
+			<div className="w-full h-screen m-0 flex flex-col h-max pb-3 flex-1" style={aboutStyle}>
 
 				<Router>
 					<Header logout={this.logout} profile={this.state.profile}/>
