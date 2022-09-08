@@ -62,9 +62,8 @@ class ChallengePage extends React.Component
 			border: "none"
 		}
 
-		console.log(this.props.status)
 		return (
-			<div className="px-10 pt-2 flex flex-1 justify-evenly max-h-screen">
+			<div className="px-10 pt-2 flex flex-1 justify-evenly max-h-screen ">
 				<div className="flex flex-col w-5/12">
 					<div style={boxStyle} className="flex-1">
 						<h1 className="text-center font-semibold" style={headerStyle}>{this.props.challenge.name}</h1>
