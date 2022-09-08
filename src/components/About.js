@@ -9,12 +9,6 @@ class About extends React.Component {
 		// 	color: 'blue',
 		// 	boxShadow: 'rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px',
 		// 	fontSize: '1rem',
-
-
-		};
-
-
-
 		return (
 			<div className="flex-1 flex flex-col justify-between my-10" >
 				<Developer
@@ -34,6 +28,7 @@ class About extends React.Component {
 				/>
 			</div>
 		);
+
 	}
 }
 

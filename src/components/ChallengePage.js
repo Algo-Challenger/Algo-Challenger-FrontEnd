@@ -44,11 +44,11 @@ class ChallengePage extends React.Component
 		return (
 			<div className="px-10 pt-2 flex flex-1 justify-evenly max-h-screen">
 				<div className="flex flex-col w-5/12">
-					<div className="border-2 border-black flex-1 px-3 py-1">
+					<div className=" flex-1 px-3 py-1">
 						<h1 className="text-center font-semibold">{this.props.challenge.name}</h1>
 						<p>{this.props.challenge.instructions}</p>
 					</div>
-					<div className="border-2 border-black flex-1 px-3 py-1 mt-3">
+					<div className=" flex-1 px-3 py-1 mt-3 text-center">
 						<h1 className="text-center font-semibold">Tests</h1>
 						<p>Input: {this.props.challenge.tests.input}</p>
 						<p>Output: {this.props.challenge.tests.output}</p>
@@ -57,7 +57,7 @@ class ChallengePage extends React.Component
 				<div className="w-6/12 flex flex-col h-full justify-around">
 					<form onSubmit={this.handleSubmit} className="text-right flex-1">
 						<textarea
-							className="w-full h-5/6 border-2 border-black px-3 py-1 resize-none "
+							className="w-full h-5/6 border-4 border-black px-3 py-1 resize-none text-black bg-neutral-200"
 							defaultValue={this.state.input}
 							onChange={this.setInput}
 						/>
