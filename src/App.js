@@ -111,6 +111,10 @@ class App extends React.Component
 				});
 		} catch (error)
 		{
+			this.setState(
+				{
+					challengeStatus: "Error sending challenge. Please try again"
+				})
 			console.log('error sending challenge solution', error.response);
 		}
 	};
@@ -122,7 +126,7 @@ class App extends React.Component
 			return <Login setProfile={this.setProfile}/>;
 		}
 		return (
-			<div className="w-full m-0 flex flex-col">
+			<div className="w-full m-0 flex flex-col h-screen pb-3">
 				<Router>
 					<Header logout={this.logout} profile={this.state.profile}/>
 					<Routes>
