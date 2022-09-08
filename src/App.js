@@ -38,6 +38,17 @@ class App extends React.Component
 		this.getChallenges();
 	}
 
+	refreshProfile = async (userId) =>
+	{
+		const url = `${process.env.REACT_APP_SERVER}/user/${userId}`;
+
+		const updatedUser = await axios.get(url);
+
+		console.log(updatedUser.data);
+
+		await this.setState({profile: updatedUser.data});
+	};
+
 	setProfile = async (profile) =>
 	{
 		let activeUser = await this.checkUser(profile);
@@ -81,7 +92,7 @@ class App extends React.Component
 
 	sendSolution = async (code, challengeId) =>
 	{
-		this.setState({challengeStatus: null})
+		this.setState({challengeStatus: null});
 		try
 		{
 			let url = `${process.env.REACT_APP_SERVER}/sendchallenge`;
@@ -92,9 +103,11 @@ class App extends React.Component
 			};
 			let response = await axios.post(url, submission);
 
-			console.log("response: ", response.data)
-
-			this.setState({challengeStatus: !!response.data});
+			await this.refreshProfile(this.state.profile._id);
+			this.setState(
+				{
+					challengeStatus: !!response.data
+				});
 		} catch (error)
 		{
 			console.log('error sending challenge solution', error.response);
