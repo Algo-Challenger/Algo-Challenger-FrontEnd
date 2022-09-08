@@ -18,8 +18,6 @@ class App extends React.Component
 		this.state = {
 			profile: {},
 			challenges: [],
-			submission: '',
-			submissionID: '',
 			challengeStatus: null,
 		};
 	}
@@ -43,12 +41,13 @@ class App extends React.Component
 	setProfile = async (profile) =>
 	{
 		let activeUser = await this.checkUser(profile);
-		console.log('active user', activeUser);
-		this.setState({ profile: activeUser });
+		this.setState({profile: activeUser});
+
 	};
 
-	logout = () => {
-		this.setState({ profile: {} });
+	logout = () =>
+	{
+		this.setState({profile: {}});
 	};
 
 	checkUser = async(profile) => {
@@ -56,15 +55,16 @@ class App extends React.Component
 			let user = {
 				name: profile.name,
 				email: profile.email
-			}
+			};
 			let url = `${process.env.REACT_APP_SERVER}/user`;
 			let activeUser = await axios.post(url, user);
 			activeUser.data.imageUrl = profile.imageUrl;
 			return activeUser.data;
-		} catch (error) {
+		} catch (error)
+		{
 			console.log('error getting user', error.response);
 		}
-	}
+	};
 
 	getChallenges = async () =>
 	{
@@ -79,32 +79,22 @@ class App extends React.Component
 		}
 	};
 
-	getInput = (e) =>
+	sendSolution = async (code, challengeId) =>
 	{
-		e.preventDefault();
-		this.setState({submission: e.target.value});
-		this.setState({submissionID: e.target.id});
-	};
-
-	sendSolution = async (e) =>
-	{
-		e.preventDefault();
+		this.setState({challengeStatus: null})
 		try
 		{
 			let url = `${process.env.REACT_APP_SERVER}/sendchallenge`;
 			let submission = {
-				code: this.state.submission,
-				challengeId: this.state.submissionID,
-				email: this.state.profile.email
+				code: code,
+				challengeId: challengeId,
+				userId: this.state.profile._id
 			};
 			let response = await axios.post(url, submission);
-			if (response.data === true)
-			{
-				this.setState({challengeStatus: true});
-			} else if (response.data === false)
-			{
-				this.setState({challengeStatus: false});
-			}
+
+			console.log("response: ", response.data)
+
+			this.setState({challengeStatus: !!response.data});
 		} catch (error)
 		{
 			console.log('error sending challenge solution', error.response);
@@ -118,7 +108,7 @@ class App extends React.Component
 			return <Login setProfile={this.setProfile}/>;
 		}
 		return (
-			<div className="w-full m-0 h-full flex flex-col">
+			<div className="w-full m-0 flex flex-col">
 				<Router>
 					<Header logout={this.logout} profile={this.state.profile}/>
 					<Routes>
@@ -130,11 +120,27 @@ class App extends React.Component
 							this.state.challenges && this.state.challenges.map((challenge, i) =>
 								<Route key={challenge._id}
 								       path={`/challenge/${challenge.name}`}
-								       element={<ChallengePage
-									       challenge={challenge}
-									       handleSubmit={this.sendSolution}
-									       handleInput={this.getInput}
-									       status={this.state.challengeStatus}/>}/>
+								       element=
+									       {
+										       <ChallengePage
+											       challenge={challenge}
+											       handleSubmit={this.sendSolution}
+											       status={this.state.challengeStatus}
+											       previousSubmission={
+												       this.state.profile.challengesInitialized.reduce((previous, current) =>
+													       // Get previous submissions and send it as a prop
+												       {
+													       if (current.challengeId === challenge._id)
+													       {
+														       return current;
+													       } else
+													       {
+														       return previous;
+													       }
+												       }, "").code}
+										       />
+									       }
+								/>
 							)
 						}
 					</Routes>
