@@ -40,7 +40,7 @@ class ChallengePage extends React.Component
 	render()
 	{
 		return (
-			<div className="px-10 pt-2 flex flex-1 justify-evenly max-h-fit">
+			<div className="px-10 pt-2 flex flex-1 justify-evenly max-h-screen">
 				<div className="flex flex-col w-5/12">
 					<div className="border-2 border-black flex-1 px-3 py-1">
 						<h1 className="text-center font-semibold">{this.props.challenge.name}</h1>
