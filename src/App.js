@@ -37,7 +37,14 @@ class App extends React.Component
 
 		gapi.load("client:auth2", start);
 		this.getChallenges();
+
 	}
+
+	resetStatus = () =>
+	{
+		this.setState({challengeStatus: null});
+	}
+
 
 	refreshProfile = async () =>
 	{
@@ -162,6 +169,7 @@ class App extends React.Component
 									       {
 										       <ChallengePage
 											       challenge={challenge}
+											       resetStatus={this.resetStatus}
 											       handleSubmit={this.sendSolution}
 											       status={this.state.challengeStatus}
 											       previousSubmission={
