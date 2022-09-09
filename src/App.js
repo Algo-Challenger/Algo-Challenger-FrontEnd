@@ -62,8 +62,10 @@ class App extends React.Component
 		this.setState({profile: {}});
 	};
 
-	checkUser = async(profile) => {
-		try {
+	checkUser = async (profile) =>
+	{
+		try
+		{
 			let user = {
 				name: profile.name,
 				email: profile.email
@@ -114,17 +116,24 @@ class App extends React.Component
 			this.setState(
 				{
 					challengeStatus: "Error sending challenge. Please try again"
-				})
+				});
 			console.log('error sending challenge solution', error.response);
 		}
+	};
+
+	deleteProfile = async () =>
+	{
+		const profileId = this.state.profile._id;
+		const apiUrl = process.env.REACT_APP_SERVER + "/user";
+
+		await axios.delete(apiUrl, {data: {userId: profileId}});
+		await this.setState({profile: {}});
 	};
 
 	render()
 	{
 
-		const aboutStyle = {
-
-		}
+		const aboutStyle = {};
 
 		if (Object.keys(this.state.profile).length === 0)
 		{
@@ -138,10 +147,13 @@ class App extends React.Component
 					<Header logout={this.logout} imageUrl={this.state.profile.imageUrl}/>
 					<Routes>
 						<Route path="/" element={<Home/>}/>
-						<Route path="/challenges" element={<Challenges challenges={this.state.challenges} profile={this.state.profile} rerender={this.refreshProfile}/>}/>
+						<Route path="/challenges"
+						       element={<Challenges challenges={this.state.challenges} profile={this.state.profile}
+						                            rerender={this.refreshProfile}/>}/>
 						<Route path="/login" element={<LogoutButton setProfile={this.setProfile}/>}/>
 						<Route path="/about" element={<About/>}/>
-						<Route path="/profile" element={<Profile profile={this.state.profile}/>}/>
+						<Route path="/profile"
+						       element={<Profile profile={this.state.profile} deleteProfile={this.deleteProfile}/>}/>
 						{
 							this.state.challenges && this.state.challenges.map((challenge, i) =>
 								<Route key={challenge._id}
