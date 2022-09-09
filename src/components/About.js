@@ -12,9 +12,10 @@ class About extends React.Component {
 		// 	fontSize: '1rem',
 
 		const styleAbout = {
-			color: "black",
+			color: "white",
+			backgroundColor: "",
+			marginTop: "0px"
 		}
-
 
 
 		return (
