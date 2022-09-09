@@ -14,7 +14,7 @@ class About extends React.Component {
 		const styleAbout = {
 			color: "white",
 			backgroundColor: "",
-			marginTop: "0px"
+			marginTop: "3.5rem",
 		}
 
 

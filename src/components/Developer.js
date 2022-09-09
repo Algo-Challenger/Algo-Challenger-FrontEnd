@@ -8,7 +8,8 @@ class Developer extends React.Component
 		const imgStyle = {
 			height: "150px",
 			width: "150px",
-			marginLeft: "2rem"
+			marginLeft: "3.5rem",
+			marginTop: "3rem"
 		}
 
 		const boxStyle = {
@@ -19,12 +20,12 @@ class Developer extends React.Component
 			padding: "1rem"
 		}
 
-		const bodyStyle = {
-			marginTop: "0px"
+		const nameStyle = {
+			fontSize: "2rem"
 		}
 
 		return (
-			<div className="flex items-center" style={bodyStyle}>
+			<div className="flex items-center">
 				<img
 					src={this.props.image}
 					// src="https://via.placeholder.com/250"
@@ -33,7 +34,7 @@ class Developer extends React.Component
 					style={imgStyle}
 				/>
 				<div className="flex-1 mx-10 h-fit px-5 pb-5 pt-3">
-					<h1 className="text-center mb-2">{this.props.name}</h1>
+					<h1 className="text-center mb-2" style={nameStyle}>{this.props.name}</h1>
 					<p className="" style={boxStyle}>
 						{this.props.description}
 					</p>
