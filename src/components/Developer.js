@@ -4,6 +4,11 @@ class Developer extends React.Component
 {
 	render()
 	{
+
+		const imgStyle = {
+			height: "100px"
+		}
+
 		return (
 			<div className="flex items-center">
 				<img
@@ -11,6 +16,7 @@ class Developer extends React.Component
 					// src="https://via.placeholder.com/250"
 					alt="coolest dev in town"
 					className="rounded-full"
+					style={imgStyle}
 				/>
 				<div className="bg-neutral-200 flex-1 mx-10 h-fit px-5 pb-5 pt-3">
 					<h1 className="text-center mb-2">{this.props.name}</h1>

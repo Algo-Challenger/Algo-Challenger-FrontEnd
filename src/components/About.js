@@ -31,7 +31,7 @@ class About extends React.Component {
 					description="I am Adrian Butler, a Software Engineer from Oklahoma. I first learned how to program a few years ago at a local tech school and from there I developed a huge passion for it and knew that I wanted to pursue a career in programming. After self teaching for a while, I felt I still had a lot to learn and enrolled in Code Fellows. At Code Fellows, I have gained a diverse set of real world skills that allow me to comfortably say I am ready for my first developer job and that I can continue to learn anything I need to be successful."
 				/>
 				<Developer
-					image="https://via.placeholder.com/250"
+					image={require("../assets/xavierheadshot.jpeg")}
 					name="Xavier Hillman"
 					description="Hi, I'm Xavier Hillman. I'm a software engineer focused on improving workplace with technology. I come from a sales and project management background in the real estate and aerospace industries. I chose to pursue software development because I felt I could have more impact as a builder of technology than a user so I specialize in web development and internal tools. I love deep diving into operations and finding ways to make things more efficient."
 				/>
