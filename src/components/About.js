@@ -22,7 +22,7 @@ class About extends React.Component {
 					description="1"
 				/>
 				<Developer
-					image="1"
+					image={require("../assets/xavierheadshot.jpeg")}
 					name="Xavier Hillman"
 					description="1"
 				/>
