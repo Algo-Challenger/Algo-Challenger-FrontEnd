@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import {GoogleLogout} from "react-google-login";
 
 class Profile extends React.Component {
   render() {
@@ -65,7 +66,7 @@ class Profile extends React.Component {
       marginTop: "1rem"
     }
 
-  
+
 
     return (
       <div style={profileStyle}>
@@ -90,6 +91,17 @@ class Profile extends React.Component {
             }
             </ul>
           </div>
+        </div>
+        <div className="text-right absolute bottom-5 right-5">
+        <GoogleLogout
+            clientId={process.env.REACT_APP_CLIENTID}
+            buttonText="Sign Out"
+            onLogoutSuccess={this.props.deleteProfile}
+            className="h-10 w-32"
+            render={renderProps => (
+                <button onClick={renderProps.onClick} disabled={renderProps.disabled} className="bg-red-900 rounded-full w-32">Delete Profile</button>
+            )}
+        />
         </div>
       </div>
     )
