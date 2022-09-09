@@ -13,7 +13,6 @@ class About extends React.Component {
 
 		const styleAbout = {
 			color: "black",
-			backgroundColor: "",
 		}
 
 
@@ -21,7 +20,7 @@ class About extends React.Component {
 		return (
 			<div className="flex-1 flex flex-col justify-between my-10 " style = {styleAbout}>
 				<Developer
-					image="https://via.placeholder.com/250"
+					image={require("../assets/imageKeelen.jpg")}
 					name="Keelen Fisher"
 					description="Keelen Fisher, born and raised in Houston Texas and officially a Full Stack Software Developer. Also an undergraduate at the University of Houston Clear Lake for Computer Science. Started with Code Fellows Software Developer program to learn so much more about Advanced Full Stack development in JavaScript to establish projects for communities big and small, while also creating my own."
 				/>
