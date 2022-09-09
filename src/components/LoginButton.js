@@ -6,7 +6,6 @@ class LoginButton extends Component
 {
 	onSuccess = (profile) =>
 	{
-		console.log(profile.profileObj);
 		this.props.setProfile(profile.profileObj);
 	}
 

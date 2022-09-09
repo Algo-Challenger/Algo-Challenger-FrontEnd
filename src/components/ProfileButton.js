@@ -26,13 +26,13 @@ class ProfileButton extends React.Component
 	render()
 	{
 		return (
-			<div className="">
+			<div>
 				<button onClick={this.toggleDropdown} className="w-10">
 					<img src={this.props.imageUrl} alt="profile" className="rounded-full"/>
 				</button>
 
 				{this.state.showDropdown
-					? <ProfileDropdown setProfile={this.props.setProfile}/>
+					? <ProfileDropdown logout={this.props.logout}/>
 					: null}
 
 			</div>
