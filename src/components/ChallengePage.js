@@ -27,6 +27,11 @@ class ChallengePage extends React.Component
 
 	}
 
+	componentDidMount()
+	{
+		this.props.resetStatus();
+	}
+
 	handleSubmit = (event) =>
 	{
 		event.preventDefault();
