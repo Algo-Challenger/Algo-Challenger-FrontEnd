@@ -2,10 +2,19 @@
 @tailwind components;
 @tailwind utilities;
 
-html, body, #root
+html, #root
 {
-    height: 100%;
+    min-height: 100% !important;
     width: 100%;
-    max-width: 100% !important;
-    max-height: 100% !important;
+
+    display: flex;
 }
+
+body
+{
+    background: linear-gradient(45deg, #0A0068, #26007B, #42008D, black, #5E00A0, #7A00B2);
+    color: white;
+    flex: 1 1 0;
+}
+
+
