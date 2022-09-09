@@ -42,9 +42,11 @@ class App extends React.Component
 	refreshProfile = async () =>
 	{
 		const url = `${process.env.REACT_APP_SERVER}/user/${this.state.profile._id}`;
+		const imageUrl = this.state.profile.imageUrl;
 
 		const updatedUser = await axios.get(url);
 
+		updatedUser.data.imageUrl = imageUrl;
 		await this.setState({profile: updatedUser.data});
 	};
 
@@ -128,11 +130,12 @@ class App extends React.Component
 		{
 			return <Login setProfile={this.setProfile}/>;
 		}
+
 		return (
 			<div className="w-full h-screen m-0 flex flex-col pb-3" style={aboutStyle}>
 
 				<Router>
-					<Header logout={this.logout} profile={this.state.profile}/>
+					<Header logout={this.logout} imageUrl={this.state.profile.imageUrl}/>
 					<Routes>
 						<Route path="/" element={<Home/>}/>
 						<Route path="/challenges" element={<Challenges challenges={this.state.challenges} profile={this.state.profile} rerender={this.refreshProfile}/>}/>
